@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inputNumber1" placeholder="height">
+    <input type="text" id="inputNumber2" placeholder="width">
+    <input type="text" id="inputNumber3" placeholder="text">
+    <input type="text" id="inputNumber4" placeholder="bgclr">
+    <input type="text" id="inputNumber5" placeholder="fontclr">
+    <button onclick="result()">Print Box</button>
+    <p id="demo" style="text-align: center;"></p>
+    <script>
+        function result() {
+            var height_1 = document.getElementById('inputNumber1').value;
+            document.getElementById('demo').style.height=height_1
+            var width_2 = document.getElementById('inputNumber2').value;
+            document.getElementById('demo').style.width=width_2
+            var text_3 = document.getElementById('inputNumber3').value;
+            document.getElementById('demo').innerHTML=text_3
+            var bgclr_4 = document.getElementById('inputNumber4').value;
+            document.getElementById('demo').style.backgroundColor=bgclr_4
+            var fntclr_5 = document.getElementById('inputNumber5').value;
+            document.getElementById('demo').style.color=fntclr_5
+
+            // let dev = document.createElement('div');
+
+            // dev.style.height = height_1
+            // dev.style.width = width_2
+            // dev.innerHTML = text_3
+            // dev.style.backgroundColor = bgclr_4
+            // dev.style.color = fntclr_5
+            // dev.style.display="inline-block"
+            // dev.style.margin="10px"
+            // document.getElementById('demo').appendChild(dev);
+        }
+    </script>
+</body>
+
+</html>

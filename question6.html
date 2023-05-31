@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="search_9">
+    <button onclick="findPerson()">Search Person</button>
+    <p id="demo"></p>
+    <script>
+        var students = [
+            {
+                name: "farhan",
+                age: "25",
+                city: "lahore"
+            },
+            {
+                name: "farhan",
+                age: "25",
+                city: "kangan pur"
+            },
+            {
+                name: "atif",
+                age: "26",
+                city: "karachi"
+            },
+            {
+                name: "shazia",
+                age: "27",
+                city: "islamabad"
+            }
+        ]
+        function findPerson() {
+            var inputNumber = document.getElementById("search_9").value;
+            var data = students.find(function (b) {
+                return (
+                    b.name === inputNumber || b.age === inputNumber || b.city === inputNumber
+                )
+            }
+            )
+            if (data) {
+                document.getElementById("demo").innerHTML = "Name is" + " " + data.name + "<br> Age is " + data.age + "<br>City " + data.city;
+
+            }
+            else {
+                document.getElementById("demo").innerHTML="Person Not Found"
+            }
+        }
+    </script>
+</body>
+
+</html>

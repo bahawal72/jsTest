@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Age Validation Example</title>
+  </head>
+  <body>
+    <label for="ageInput">Enter your age:</label>
+    <input type="number" id="ageInput" name="ageInput">
+    <button onclick="checkAge()">Click Me</button>
+    <p id="ageMessage"></p>
+    <script>
+      function checkAge() {
+        const ageInput =Number (document.getElementById("ageInput").value);
+        if (ageInput < 10 || ageInput > 20) {
+          document.getElementById("ageMessage").innerHTML =  "Invalid age.Enter age between 10 to 20."
+        } else {
+            document.getElementById("ageMessage").innerHTML = "Valid age.";
+        }
+      }
+    </script>
+  </body>
+</html>

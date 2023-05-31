@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="button-container">
+        <br>
+        </div>
+        <br>
+        <button onclick="Print(event)">Generate</button>
+        <script>
+            function Print(e) {
+                var container = document.getElementById('button-container'),
+                    children = container.children,
+                    lastValue = 0,
+                    button,
+                    lineBreak = document.createElement('br');
+                if (children) {
+                    for (var i = 0; i <= children.length - 1; i++) {
+                        if (children[i].value) {
+                            lastValue = parseInt(children[i].value);
+                        }
+                    }
+                }
+                var limit = lastValue + 6;
+                for (var i = lastValue + 1; i <= limit; i++) {
+                    button = document.createElement('input');
+                    button.setAttribute('type', 'button');
+                    button.setAttribute('name', 'btn');
+                    button.setAttribute('value', i);
+                    container.appendChild(button);
+                }
+                container.appendChild(lineBreak);
+            }
+        </script>
+</body>
+</html>

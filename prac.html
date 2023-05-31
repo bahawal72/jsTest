@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 bg-primary text-white h1 text-center">
+                Crud Demo
+            </div>
+            
+            <div id="form" class="col-md-12 pt-3 bg-success text-white">
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">Image</span>
+                    <input type="file" class="form-control w-100 h-50 fs-5 border-1 rounded-1" id="img" placeholder="Year" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">Year</span>
+                    <input type="text" class="form-control" id="year" placeholder="Year" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">Make</span>
+                    <input type="text" class="form-control" id="make" placeholder="suzuki e.g" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">Model</span>
+                    <input type="text" class="form-control" id="model" placeholder="1996 e.g" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">Color</span>
+                    <input type="text" class="form-control" id="color" placeholder="blue e.g" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <button id="newbtn" class="btn btn-primary" onclick="save()">Save</button>
+            </div>
+
+            <div class="col-md-12 bg-secondary text-white">
+                <table class="table text-white">
+                    <thead>
+                        <th>Sr.No</th>
+                        <th>Image</th>
+                        <th>Year</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Color</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody id="vehicles">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        let vehicles = [];
+        let id = null;
+        function save() {
+            let obj = {
+                img : $('img').files[0],
+                year: $('year').value,
+                make: $('make').value,
+                model: $('model').value,
+                color: $('color').value
+            }
+            let set = id;
+            setTimeout( function() {
+            if (set |set ===0) {
+                vehicles.push(obj);
+            } else {
+                vehicles[set] = obj;
+            }vehicleslist();   
+        },20)
+            let reader = new FileReader();
+            reader.onload = function(){
+            obj.img = reader.result;
+            };
+            reader.readAsDataURL(obj.img);
+            clearform();
+            var newbtn = $('newbtn')
+            newbtn.innerText= 'save'
+          
+        }
+        function vehicleslist() {
+            let output = "";
+            let counter = 1;
+            for (index in vehicles) {
+                output += "\
+                            <tr>\
+                                <td>" + counter + " </td>\
+                                <td><div><img height='140px' width='140px' src='"+ vehicles[index].img+"'></div> </td>\
+                                <td>" + vehicles[index].year + " </td>\
+                                <td>" + vehicles[index].make + " </td>\
+                                <td>" + vehicles[index].model + " </td>\
+                                <td>" + vehicles[index].color + " </td>\
+                                <td>  <button class='btn btn-primary' onclick=edit("+ index + ")>Edit</button><button class='btn btn-danger' onclick=del(" + index + ") >Delete</button> </td>\
+                             </tr>\
+                ";
+                counter++
+            }
+            $("vehicles").innerHTML = output;
+        }
+        function clearform() {
+            id = null;
+            $('form').classList.remove("bg-warning");
+            $('form').classList.add("bg-success");
+            $('img').value= "";
+            $('year').value = "";
+            $('make').value = "";
+            $('model').value = "";
+            $('color').value = "";
+        }
+        function edit(i) {
+            id = i;
+            $('form').classList.remove("bg-success");
+            $('form').classList.add("bg-warning");
+            $('img').files[0]=vehicles[i].img;
+            $('year').value = vehicles[i].year;
+            $('make').value = vehicles[i].make;
+            $('model').value = vehicles[i].model;
+            $('color').value = vehicles[i].color;
+            var newbtn = $('newbtn')
+            newbtn.innerText= 'update'
+        }
+        function del(i) {
+            vehicles.splice(i, 1);
+            vehicleslist();
+            clearform();
+        };
+        function $(id) {
+            return document.getElementById(id)
+        }
+
+    </script>
+</body>
+
+</html>
+
+</div>
+</body>
+</html>

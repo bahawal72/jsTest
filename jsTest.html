@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    .fst-italic {
+        font-size: 13px;
+        color: orangered;
+    }
+
+    .box {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        background-color: #e8f2fe;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div>
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Js Test
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="border p-1">
+                                        <input class="form-check-input" onclick="basic()" type="radio"
+                                            name="flexRadioDefault" id="basicRadio">
+                                        <label class="form-check-label fw-bold" for="basicRadio">
+                                            Basic Info
+                                        </label>
+                                        <div class="pt-2 fst-italic" id="req">
+                                            (*required)
+                                        </div>
+                                        <div class="text-end ">
+                                            <button onclick="basicedit()"
+                                                class="border-0 text-primary bg-light">Edit</button>
+                                        </div>
+                                    </div>
+                                    <div class="border p-1 my-2">
+                                        <input class="form-check-input" onclick="uiCreation()" type="radio"
+                                            name="flexRadioDefault" id="bInfoRadio">
+                                        <label class="form-check-label fw-bold" for="bInfoRadio">
+                                            Business Info
+                                        </label>
+                                        <div class="pt-2 fst-italic" id="req2">
+                                            (*required)
+                                        </div>
+                                        <div class="text-end ">
+                                            <button onclick="editBusiness()"
+                                                class="border-0 text-primary bg-light">Edit</button>
+                                        </div>
+                                    </div>
+                                    <div class="border p-1">
+                                        <input class="form-check-input" onclick="finds()" type="radio"
+                                            name="flexRadioDefault" id="findRadio">
+                                        <label class="form-check-label fw-bold" for="findRadio">
+                                            Find US
+                                        </label>
+                                        <div class="pt-2 fst-italic" id="req3">
+                                            (*required)
+                                        </div>
+                                        <div class="text-end ">
+                                            <button onclick="edit3()" id="newbtn3"
+                                                class="border-0 text-primary bg-light">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div id="output1"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    let arr = [];
+    let id = null;
+
+    //Confirm button of basic info
+
+
+    function confirm()
+     {
+        if( $('input1').value !="" && $('input2').value !="" && $('input3').value !=""){ 
+        let obj = {
+            input1: $('input1').value,
+            input2: $('input2').value,
+            input3: $('input3').value
+        }
+            arr.push(obj);
+            // console.log(arr)
+        basic();
+        var newbtn = $('req')
+        newbtn.innerText = 'save'
+        newbtn.style.color = 'green'
+        uiCreation();
+        }
+        else{
+            alert ('please fill all fields')
+        }
+    }
+
+    //Edit the Basic Page
+
+    function basicedit(i) 
+    {
+        basic();
+        i = 0;
+        id = i;
+        $('input1').value = arr[i].input1;
+        $('input2').value = arr[i].input2;
+        $('input3').value = arr[i].input3;
+    }
+
+
+    // Display the basic page
+
+
+    function basic() 
+    {
+        let output2 = "";
+        output2 += "\
+                    <div class=' row box mt-1'>\
+                        <div class='col-12 h4 pt-3'>Basic Info <span class='text-danger h6 fst-italic'>required</span>\
+                        <div class='row'>\
+                            <div class='col-md-9 text-end d-flex'>\
+                            <div class= 'col-12 text'>  <button onclick='confirm()' class='btn btn-dark' id='btn1'>Confirm</button></div>\
+                        </div>\
+                        </div>\
+                  </div>\
+                  </div>\
+                  <div class='pt-5 fw-bold'>Give users basic information on your business.</div>\
+                  <div ><input class='w-50 p-2' type='text' placeholder='Business name' id='input1'></div>\
+                  <div class='mt-4' ><input class='w-50 p-2' type='email' placeholder='Contact email' id='input2' ></div>\
+                  <div class='mt-4'><textarea id='input3' cols='54' rows='10' placeholder='Business Description'></textarea></div>\
+        "
+        $('output1').innerHTML = output2;
+    }
+
+
+    var rQuestions = [];
+
+    // On Clicking Business Info Button
+    function uiCreation()
+    {
+       
+        $('bInfoRadio').checked = 'checked';
+        let businessData = businessLogic()
+        $('output1').innerHTML = factoryUIComponent(businessData);
+    }
+
+    function factoryUIComponent(questionList)
+    {
+        var output3 = "";
+        output3 = "\
+            <div class=' row box mt-1'>\
+                        <div class='col-12 h4 pt-3'>Business Info <span class='text-danger h6 fst-italic'>required</span>\
+                        <div class='row'>\
+                            <div class='col-md-9 text-end d-flex'>\
+                            <div class= 'col-12 text'>  <button onclick='confirmAndResetUI()' class='btn btn-dark' id='btn1'>Confirm</button></div>\
+                        </div>\
+                        </div>\
+                  </div>\
+                  </div>"
+
+        questionList.forEach(element => {
+            let questionUI = getQuestionUI(element);
+            output3 += questionUI;    
+        });
+        return output3;
+
+    }
+
+    function getQuestionUI(obj)
+    {
+        
+        var component = `\
+                        <div class='fw-bold mt-4'>${obj.title}</div>`
+        let options = getOptionUI(obj)
+        component += options;
+        return component;
+    }
+
+    function getOptionUI(obj)
+    {
+        var optionsUI = "";
+        obj.optionList.forEach((element) => {
+            let option =               `\
+                       <fieldset id=${obj.id}><input type='radio' id=${element.id} name=${obj.id} value=${element.title} onclick='uxCreation(this)' ${element.isCheck}?checked:''>${element.title}</fieldset>`
+            optionsUI +=option;
+        });
+        return optionsUI; 
+    }
+
+    function businessLogic()
+    {
+
+        rQuestions = [];
+        let question1 = {id:'1',title:"Retail Model*", optionList:[{title:"E-Commerce, Online Only",id:"in1",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in2",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in3",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in4",isCheck:false}]};
+        let question2 = {id:'2',title:"Retail Model1", optionList:[{title:"E-Commerce, Online Only",id:"in5",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in6",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in7",isCheck:false},{title:"Retail, In-Store Only - No E-Commerce",id:"in8",isCheck:false}]};
+        rQuestions.push(question1);
+        rQuestions.push(question2);
+        let quesList = rQuestions;
+        return quesList;
+      
+
+    }
+
+    function storeInWebStorage(key, arr) 
+    {
+        localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    function retrieveFromWebStorage(key) 
+    {
+        return JSON.parse(localStorage.getItem(key));
+    }
+
+    //                 <====    Change only the radio button data who ever clicked on the basis of question id and option id   =====>
+
+    function uxCreation(obj)
+    {
+        
+        rQuestions.forEach(element => {
+           if(obj.name === element.id){
+                element.optionList.forEach(element1 => {
+                    if(element1.id === obj.id){
+                        element1.isCheck = true;
+                    }else{
+                        element1.isCheck = false;
+                    }
+                });
+            }
+        });    
+    }
+ 
+    //                                      <====    Confirm Button of Business Logic    ====>
+
+
+    function confirmAndResetUI()
+    {
+        storeInWebStorage('businessInfo',rQuestions);
+        let showArr = [];
+        rQuestions.forEach(element => {
+                element.optionList.forEach(element1 => {
+                $(element1.id).checked = '';
+                element1.isCheck = false;
+                    
+                });
+        });
+        
+        var newbtn2 = $('req2')
+        newbtn2.innerText = 'save'
+        newbtn2.style.color = 'green'
+    
+    }
+
+    //                                     <====      Edit function of Business Logic     ====>
+
+    function editBusiness()
+    {
+        uiCreation();
+        rQuestions = [];
+        let businessData = retrieveFromWebStorage("businessInfo");
+        businessData.forEach(element => {
+            rQuestions.push(element);
+        });
+        $('output1').innerHTML = factoryUIComponent(businessData);
+
+        rQuestions.forEach(element => {
+                element.optionList.forEach(element1 => {
+                    if(element1.isCheck){
+                        $(element1.id).checked = 'checked';    
+                    }   
+                });
+        });  
+    }
+
+    let arr4 = [];
+
+   
+    //                                     <====       Confirm Button of Find Us      ====>
+
+
+   function confirm2()
+   {
+    arr4=[];
+        var find=document.getElementsByClassName('d1');
+        var find2=document.getElementsByClassName('d2');
+        for(var i=0;i<find.length;i++)
+        {
+            let obj={one:find[i].value,
+                     two:find2[i].value
+                    };
+            arr4.push(obj);
+           
+        }
+        console.log(arr4);
+        finds();
+
+        var newbtn3 = $('req3')
+        newbtn3.innerText = 'save'
+        newbtn3.style.color = 'green'
+   }
+
+   //                                      <====       Edit function of Find Us       ====>
+
+    
+   function edit3(i)
+    {
+        finds();
+        $('more').innerHTML="";
+       for(var i=0;i<arr4.length;i++)
+       {
+        let plus = document.createElement("div")
+
+           
+             plus.innerHTML= "\<div class='d-flex pt-3'>\
+            <div><input class='p-2 d1' type='text'  placeholder='Business Name'></div>\
+            <div><input class='p-2 ms-4 d2' type='text' placeholder='https://'></div>\
+            </div>\
+            ";
+          $('more').appendChild(plus);
+          document.getElementsByClassName('d1')[i].value=arr4[i].one;
+          document.getElementsByClassName('d2')[i].value=arr4[i].two;
+       }
+    }
+
+
+    //                                   <====       Dsiplay The Find Us page        ====>
+
+
+    function finds()
+     {
+        $('findRadio').checked = 'checked';
+        let output4 = "";
+        output4 += "\
+                        <div class=' row box mt-1'>\
+                        <div class='col-12 h4 pt-3'>Find Us <span class='text-danger h6 fst-italic'>required</span>\
+                        <div class='row'>\
+                            <div class='col-md-9 text-end d-flex'>\
+                            <div class= 'col-12 text'>  <button onclick='confirm2()' class='btn btn-dark' id='btn1'>Confirm</button></div>\
+                            <div class='text-center ms-1'><button onclick='publish()' class='btn btn-success'>Publish</button></i></div>\
+                        </div>\
+                        </div>\
+                        </div>\
+                        </div>\
+                        <div class='mt-5'>Let users know where they can find your products online.</div>\
+                        <div id='more'>\
+                         <div  class='d-flex pt-3'>\
+                        <div><input class='p-2 d1' id='input4' type='text'  placeholder='Business Name'></div>\
+                        <div><input class='p-2 d2 ms-4' id='input5'  type='text' placeholder='https://'></div>\
+                        </div>\
+                        </div>\
+                        <div class='text-center pt-1'><button onclick='plus()' class='btn btn-danger'> <i class='fa-solid fa-plus'></i></button></i></div>\
+                        "
+        $('output1').innerHTML = output4;
+    }
+    let count = 0;
+
+    //                                <====        Incrementing the Input Fields      ====>
+
+
+    function plus() 
+    {
+        if (count < 3) {
+            let plus = document.createElement("div")
+
+           
+            plus.innerHTML= "\<div class='d-flex pt-3'>\
+                        <div><input class='p-2 d1' type='text'  placeholder='Business Name'></div>\
+                        <div><input class='p-2 ms-4 d2' type='text' placeholder='https://'></div>\
+                        </div>\
+                        ";
+            $('more').appendChild(plus);
+        }
+        count++;
+    }
+    let publish_arr=[];
+
+
+    //                               <====       Finally Publishing the entire arrays      ====>
+
+    function publish()
+    {
+        if(arr.length !=0 && rQuestions.length !=0 && arr4.length !=0){
+          publish_arr.push(arr);
+          publish_arr.push(rQuestions);
+          publish_arr.push(arr4);
+          
+          let btn1 = $('req');
+          btn1.innerText = ('published');
+           
+          let btn2 = $('req2');
+          btn2.innerText = ('published');
+           
+          let btn3 = $('req3');
+          btn3.innerText = ('published');
+
+         $('demo').innerHTML=publish_arr;
+        }
+        else{
+           altert ('Data not found')
+        }
+    }
+    function $(id)
+    {
+        return document.getElementById(id)
+    }
+</script>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="fw-bold text-center">Invoice</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-3 pt-4">
+                <h4>Description :</h4>
+                <input type="text" id="input1" placeholder="Add item">
+            </div>
+            <div class="col-md-3 pt-4">
+                <h4>Price</h4>
+                <input type="number" id="input2" placeholder="Rs/-">
+            </div>
+
+            <div class="col-md-6 mt-5">
+                <table class="w-75">
+                    <thead class="fs-4" style="border: 3px solid black;">
+                        <th style="border: 3px solid black;">Discription</th>
+                        <th class="ps-3"> Price</th>
+                    </thead>
+                    <tbody id="output"></tbody>
+                    <tbody id="output1"></tbody>
+                    <tbody id="output2"></tbody>
+                    <tbody id="output3"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex"> 
+            <div class="col-md-1 mt-3">
+                <button class="bg-success text-white border-0 p-2 " onclick="add_1()">Add Item</button>
+            </div>
+            <div>
+                <button class="bg-primary border-0 p-2 text-white mt-3" onclick="_total()">Total</button>
+            </div>
+        </div>
+        <div>
+            <div class="dropdown mt-3">
+                <input type="number" id="discount_value" placeholder="enter value">
+                <button  class="bg-danger border-0 p-1 text-white" onclick="discount()">Discount</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let arr = [];
+        function add_1() {
+            var inputOne = document.getElementById('input1').value;
+            var inputTwo = document.getElementById('input2').value;
+            document.getElementById('input1').value = "";
+            document.getElementById('input2').value = "";
+            arr.push(inputOne);
+            arr.push(inputTwo);
+            var table_1 = "<tr class='border-bottom'><td> " + inputOne + "</td><td>" + inputTwo + "</td></tr>";
+            document.getElementById('output1').innerHTML += table_1;
+        }
+        function _total() {
+            var sum = 0;
+            for (var i = 1; i < arr.length; i = i + 2) {
+                sum = sum + parseInt(arr[i]);
+                document.getElementById('output2').innerHTML = "\
+                                                                <tr class='border-bottom fw-bold'>\
+                                                                    <td>"+ "Total" + " </td>\
+                                                                    <td> "+ sum + " </td>\
+                                                                    </tr>\
+                                                                    ";
+            }
+        }
+        function calculateSum() {
+            var sum = 0;
+            for (var i = 1; i < arr.length; i = i + 2) {
+                sum = sum + parseInt(arr[i]);
+            }
+            return sum;
+        }
+
+        function discount() {
+            let sum = calculateSum();
+            let discount_value = document.getElementById('discount_value').value; 
+            document.getElementById('output3').innerHTML = "\
+                                                        <tr class='border-bottom fw-bold'>\
+                                                           <td>"+ "Discount" + " </td>\
+                                                           <td> "+ "Rs " + (sum - discount_value) + " </td>\
+                                                        </tr>\
+                                                                    ";
+        }
+    </script>
+</body>
+
+</html>

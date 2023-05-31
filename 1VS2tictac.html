@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    .btn {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(54, 114, 114);
+        font-size: 22px;
+        color: orange;
+        /* background-image: linear-gradient(to right,#006be1,#00ecce); */
+    }
+
+    .btn-1 {
+        margin-left: -300px;
+        background-image: linear-gradient(to right, #006be1, #00ecce);
+        color: white;
+        border: none;
+    }
+</style>
+
+<body style="text-align: center; background-color: black;">
+
+    <div style=" background-color: black; color: red; text-align: center; margin-top: 10px;">
+       <h1> TicTac game</h1>
+    </div>
+    <div class="pt-5">
+        <input type="text" id="input1" placeholder="ENTER NAME P1">
+        <input type="text" id="input2" placeholder="ENTER NAME P2">
+    </div>
+    <div style="margin: 5px; margin-top: 40px;">
+        <button id="0" class="btn" onclick="box(this)"></button>
+        <button id="1" class="btn" onclick="box(this)"></button>
+        <button id="2" class="btn" onclick="box(this)"></button>
+    </div>
+    <div style="margin: 5px;">
+        <button id="3" class="btn" onclick="box(this)"></button>
+        <button id="4" class="btn" onclick="box(this)"></button>
+        <button id="5" class="btn" onclick="box(this)"></button>
+    </div>
+    <div style="margin: 5px;">
+        <button id="6" class="btn" onclick="box(this)"></button>
+        <button id="7" class="btn" onclick="box(this)"></button>
+        <button id="8" class="btn" onclick="box(this)"></button>
+    </div>
+    <div>
+        <button class="btn-1" onclick="window.location.reload()">Reset</button>
+    </div>
+    <div style=" color: aqua; font-size: 20px;">
+
+        <p id="demo"></p>
+    </div>
+    
+    <script>
+        var x = 1
+        var c = 0
+        function box(p) {
+            var h = document.getElementById("demo").innerHTML
+            var inputNum = document.getElementById("input1").value
+            var inputNum2 = document.getElementById("input2").value
+            if (x == 1 && h == "") {
+                p.innerHTML = "X"
+                p.onclick = ""
+                x++;
+                c++;
+            } else if (x == 2 && h == "") {
+                p.innerHTML = "O"
+                p.onclick = ""
+                x--;
+                c++;
+            }
+            // winning section
+            if (c > 3) {
+                var zero = document.getElementById("0").innerHTML
+                var one = document.getElementById("1").innerHTML
+                var two = document.getElementById("2").innerHTML
+                var three = document.getElementById("3").innerHTML
+                var four = document.getElementById("4").innerHTML
+                var five = document.getElementById("5").innerHTML
+                var six = document.getElementById("6").innerHTML
+                var seven = document.getElementById("7").innerHTML
+                var eight = document.getElementById("8").innerHTML
+            }
+            if (zero && zero == one && one == two) {
+                document.getElementById("demo").innerHTML = zero + " win"
+                document.getElementById("0").style.backgroundColor = "red"
+                document.getElementById("1").style.backgroundColor = "red"
+                document.getElementById("2").style.backgroundColor = "red"
+            } else if (three && three == four && four == five) {
+                document.getElementById("demo").innerHTML = three + " win"
+                document.getElementById("3").style.backgroundColor = "red"
+                document.getElementById("4").style.backgroundColor = "red"
+                document.getElementById("5").style.backgroundColor = "red"
+            } else if (six && six == seven && seven == eight) {
+                document.getElementById("demo").innerHTML = six + " win"
+                document.getElementById("6").style.backgroundColor = "red"
+                document.getElementById("7").style.backgroundColor = "red"
+                document.getElementById("8").style.backgroundColor = "red"
+            } else if (zero && zero == three && three == six) {
+                document.getElementById("demo").innerHTML = zero + " win"
+                document.getElementById("0").style.backgroundColor = "red"
+                document.getElementById("3").style.backgroundColor = "red"
+                document.getElementById("6").style.backgroundColor = "red"
+            } else if (one && one == four && four == seven) {
+                document.getElementById("demo").innerHTML = one + " win"
+                document.getElementById("1").style.backgroundColor = "red"
+                document.getElementById("4").style.backgroundColor = "red"
+                document.getElementById("7").style.backgroundColor = "red"
+            } else if (two && two == five && five == eight) {
+                document.getElementById("demo").innerHTML = two + " win"
+                document.getElementById("2").style.backgroundColor = "red"
+                document.getElementById("5").style.backgroundColor = "red"
+                document.getElementById("8").style.backgroundColor = "red"
+            } else if (zero && zero == four && four == eight) {
+                document.getElementById("demo").innerHTML = zero + " win"
+                document.getElementById("0").style.backgroundColor = "red"
+                document.getElementById("4").style.backgroundColor = "red"
+                document.getElementById("8").style.backgroundColor = "red"
+            } else if (two && two == four && four == six) {
+                document.getElementById("demo").innerHTML = two + " win"
+                document.getElementById("2").style.backgroundColor = "red"
+                document.getElementById("4").style.backgroundColor = "red"
+                document.getElementById("6").style.backgroundColor = "red"
+            } else {
+                if (c == 9) {
+                    document.getElementById("demo").innerHTML = "draw"
+                }
+            }
+            let winner = document.getElementById("demo").innerText
+            if (winner == "X win") {
+                document.getElementById("demo").innerHTML = inputNum + " win"
+            } else if (winner == "O win") {
+                document.getElementById("demo").innerHTML = inputNum2 + " win"
+            }
+        }
+    </script>
+</body>
+
+</html>

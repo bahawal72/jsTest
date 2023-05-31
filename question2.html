@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="startNumber" placeholder="start number">
+         <input type="number" id="endNumber" placeholder="end number">
+         <input type="number" id="tableData" placeholder="table">
+         <button type="button" onclick="multiply1()">click</button>
+         <p id="demo9"></p>
+         <script>
+            function multiply1()
+            {
+                var start = Number(document.getElementById('startNumber').value);
+                var end = Number(document.getElementById('endNumber').value);
+                var printTableOne = Number(document.getElementById('tableData').value);
+                for(var i = start; i < end; i++)
+                {
+                    console.log(start, end, i, printTableOne);
+                    document.getElementById('demo9').innerHTML += printTableOne + " * " + i + " = " + i * printTableOne + "<br>";
+                
+                }
+            }
+         </script>
+</body>
+</html>

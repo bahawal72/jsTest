@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="date" id="date_1">
+    <button onclick="datepicker()">Print</button>
+    <p id="demo"></p>
+    <script>
+       
+        function datepicker(){
+         var day_1 = new Date(document.getElementById('date_1').value);
+         var a = day_1.toString().split(' ')[0]
+         document.getElementById('demo').innerHTML = 'Today is ' + a + ' month is ' + day_1.toLocaleString('en-us',{month:'short', year:'numeric'});
+         console.log(a)
+        }
+    </script>
+</body>
+</html>
